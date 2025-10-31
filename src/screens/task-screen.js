@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { View, FlatList, Text, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import CategoryBadge from '../components/category-badge';
+import CategoryFilterBar from '../components/category-filter-bar';
 import { TASK_CATEGORIES, CATEGORY_LIST } from '../data/task-categories-data';
 import { TASKS } from '../data/tasks'
 
@@ -38,22 +38,11 @@ export default function TasksScreen() {
   return (
     <View style={styles.container}>
       {/* CATEGORY BADGES ROW */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.badgeRow}
-      >
-        {CATEGORY_LIST.map(({ key, label, color }) => (
-          <CategoryBadge
-            key={key}
-            label={label}
-            count={taskCounts[key]}
-            color={color}
-            isActive={selectedCategory === key}
-            onPress={() => setSelectedCategory(key)}
-          />
-        ))}
-      </ScrollView>
+     <CategoryFilterBar
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        taskCounts={taskCounts}
+      />
 
       {/* TASK LIST */}
       <FlatList
@@ -75,7 +64,6 @@ export default function TasksScreen() {
 
 const styles = StyleSheet.create({
   container: {  backgroundColor: '#f9f9f9' },
-  badgeRow: { paddingHorizontal: 16, paddingVertical: 12, backgroundColor: '#fff' },
   taskList: { padding: 16 },
   taskCard: {
     backgroundColor: '#fff',

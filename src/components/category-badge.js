@@ -38,11 +38,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent : "center",
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
     marginRight: 8,
     minHeight: 36,
+    minWidth : "18%"
   },
   activeShadow: {
     ...Platform.select({
